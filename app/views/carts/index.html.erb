@@ -1,27 +1,46 @@
-<h1>Carts</h1>
-<%= form_tag({:action => :import}, multipart: true) do %>
+<div class="py-8 px-6 d-flex justify-content-center">
+  <h3 class="my-4">Welcome to Carts PRO 👋</h3>
+</div>
+<%= form_tag({action: :import}, multipart: true) do %>
+  <%= label_tag(:q, "Upload file:", ) %>
   <%= file_field_tag :file %>
-  <%= submit_tag( "Import" ) %>
+  <%= submit_tag( "Import" , class: "btn-primary") %>
 <% end %>
-<table>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Purchaser Name</th>
+      <th scope="col">Item Description</th>
+      <th scope="col">Item Price</th>
+      <th scope="col">Item Count</th>
+      <th scope="col">Merchant Address</th>
+      <th scope="col">Merchant Name</th>
+    </tr>
+  </thead>
   <tbody>
     <% gross_total = 0.0 %>
     <% @sales.each do |shop| %>
       <% total = 0.0 %>
+      <% count = 1 %>
       <% shop.carts.each do |element| %>
         <tr>
+          <th scope="row"><%= count %></th>
           <td><%= element.purchaser.name %></td>
           <td><%= element.item.description %></td>
           <td><%= element.item.price %></td>
           <td><%= element.count %></td>
           <td><%= element.item.merchant.address %></td>
           <td><%= element.item.merchant.name %></td>
-        </tr>
-      </tbody>
-      <% total += element.item.price * element.count %>
-    <% end %>
-    <%= total %>
+          <% count += 1%>
+          <% total += element.item.price * element.count %>
+        <% end %>
+        <td>Total sale: <%= total %></td>
+      </tr>
+    </tbody>
     <% gross_total += total%>
   <% end %>
 </table>
-<%= gross_total %>
+<div class="py-8 px-6 d-flex justify-content-center">
+  <h4 class="my-4">Gross Total Sales! <%= gross_total %>💸</h4>
+</div>
