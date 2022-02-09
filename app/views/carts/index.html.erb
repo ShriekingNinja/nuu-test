@@ -17,11 +17,11 @@
           <td><%= element.item.merchant.address %></td>
           <td><%= element.item.merchant.name %></td>
         </tr>
-        <% total += element.item.price * element.count %>
-      <% end %>
-      <%= total %>
-      <% gross_total += total%>
+      </tbody>
+      <% total += element.item.price * element.count %>
     <% end %>
-  </tbody>
+    <%= total %>
+    <% gross_total += total%>
+  <% end %>
 </table>
 <%= gross_total %>

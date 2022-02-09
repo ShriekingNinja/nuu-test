@@ -29,6 +29,8 @@ gem "stimulus-rails"
 
 gem 'csv'
 gem 'tsv'
+gem 'rspec-rails', '~> 4.0.0'
+gem 'rails-controller-testing'
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
