@@ -1,6 +1,22 @@
-<h1>Carts#index</h1>
-<p>Find me in app/views/carts/index.html.erb</p>
+<h1>Carts</h1>
 <%= form_tag({:action => :import}, multipart: true) do %>
   <%= file_field_tag :file %>
   <%= submit_tag( "Import" ) %>
 <% end %>
+<table>
+  <% total_sales = 0.0 %>
+  <tbody>
+    <% @carts.each do |element| %>
+      <tr>
+        <td><%= element.purchaser.name %></td>
+        <td><%= element.item.description %></td>
+        <td><%= element.item.price %></td>
+        <td><%= element.count %></td>
+        <td><%= element.item.merchant.address %></td>
+        <td><%= element.item.merchant.name %></td>
+      </tr>
+      <% total_sales += element.item.price * element.count %>
+    <% end %>
+  </tbody>
+</table>
+<%= total_sales %>
