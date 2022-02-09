@@ -5,6 +5,10 @@ class CartsController < ApplicationController
 
   def import
     myfile = params[:file]
+    if myfile.blank?
+      flash.alert = 'Please select file.'
+      return
+    end
     @tsv_file = TSV[myfile.path].map { |row| row }
     @tsv_file.each do |row|
       array = row.data
@@ -17,6 +21,7 @@ class CartsController < ApplicationController
       @cart.item = @item
       @cart.save!
     end
+    redirect_to root_path
   end
 
   def check_purchaser(name)
