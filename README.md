@@ -1,24 +1,18 @@
-# README
+# Carts PRO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app parse your TSV into the database!
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+You need to run bundle to install its dependencies
 
-* System dependencies
+```bash
+bundle install
+```
 
-* Configuration
+## Usage
+Click on browse and upload your file, the file must have headers and follow the correct format.
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
