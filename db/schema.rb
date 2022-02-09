@@ -19,10 +19,12 @@ ActiveRecord::Schema.define(version: 2022_02_08_194708) do
     t.integer "count"
     t.bigint "item_id", null: false
     t.bigint "purchaser_id", null: false
+    t.bigint "sale_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_carts_on_item_id"
     t.index ["purchaser_id"], name: "index_carts_on_purchaser_id"
+    t.index ["sale_id"], name: "index_carts_on_sale_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -47,7 +49,13 @@ ActiveRecord::Schema.define(version: 2022_02_08_194708) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "carts", "items"
   add_foreign_key "carts", "purchasers"
+  add_foreign_key "carts", "sales"
   add_foreign_key "items", "merchants"
 end

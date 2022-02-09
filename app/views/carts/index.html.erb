@@ -4,19 +4,24 @@
   <%= submit_tag( "Import" ) %>
 <% end %>
 <table>
-  <% total_sales = 0.0 %>
   <tbody>
-    <% @carts.each do |element| %>
-      <tr>
-        <td><%= element.purchaser.name %></td>
-        <td><%= element.item.description %></td>
-        <td><%= element.item.price %></td>
-        <td><%= element.count %></td>
-        <td><%= element.item.merchant.address %></td>
-        <td><%= element.item.merchant.name %></td>
-      </tr>
-      <% total_sales += element.item.price * element.count %>
+    <% gross_total = 0.0 %>
+    <% @sales.each do |shop| %>
+      <% total = 0.0 %>
+      <% shop.carts.each do |element| %>
+        <tr>
+          <td><%= element.purchaser.name %></td>
+          <td><%= element.item.description %></td>
+          <td><%= element.item.price %></td>
+          <td><%= element.count %></td>
+          <td><%= element.item.merchant.address %></td>
+          <td><%= element.item.merchant.name %></td>
+        </tr>
+        <% total += element.item.price * element.count %>
+      <% end %>
+      <%= total %>
+      <% gross_total += total%>
     <% end %>
   </tbody>
 </table>
-<%= total_sales %>
+<%= gross_total %>

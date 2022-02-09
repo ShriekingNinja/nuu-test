@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   def index
     @carts = Cart.all
+    @sales = Sale.all
   end
 
   def import
@@ -9,6 +10,8 @@ class CartsController < ApplicationController
       flash.alert = 'Please select file.'
       return
     end
+    @sale = Sale.new
+    @sale.save!
     @tsv_file = TSV[myfile.path].map { |row| row }
     @tsv_file.each do |row|
       array = row.data
@@ -18,6 +21,7 @@ class CartsController < ApplicationController
       check_purchaser(array[0])
       check_item(array[1], array[2])
       @cart.purchaser = @purchaser
+      @cart.sale = @sale
       @cart.item = @item
       @cart.save!
     end
